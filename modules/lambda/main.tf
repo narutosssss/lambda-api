@@ -37,18 +37,3 @@ resource "aws_lambda_function" "lambda" {
 
   tags = "${var.tags}"
 }
-
-resource "aws_lambda_function_permission" "lambda" {
-  function_name = "${aws_lambda_function.lambda.function_name}"
-  qualifier     = "${aws_lambda_function.lambda.version}"
-}
-
-resource "aws_lambda_event_source_mapping" "event_source_mapping" {
-  function_name = "${aws_lambda_function.lambda.arn}" //
-}
-
-resource "aws_lambda_alias" "test_alias" {
-  name             = "testalias"
-  function_name    = "${aws_lambda_function.lambda.function_name}"
-  function_version = "${aws_lambda_function.lambda.version}"
-}
