@@ -70,13 +70,13 @@ resource "aws_api_gateway_deployment" "deployment" {
   #}
 }
 
-# resource "aws_lambda_permission" "allow_api_gateway" {
-#   function_name = "${local.lambda_arn}"
-#   statement_id  = "AllowExecutionFromApiGateway"
-#   action        = "lambda:InvokeFunction"
-#   principal     = "apigateway.amazonaws.com"
-#   source_arn    = "arn:aws:execute-api:${local.region}:${local.account_id}:${aws_api_gateway_rest_api.api.id}/*/${local.method}${aws_api_gateway_resource.proxy.path}"
-#   # source_arn = "${aws_api_gateway_rest_api.api.execution_arn}/*/*/*"
-#   depends_on    = ["aws_api_gateway_rest_api.api", "aws_api_gateway_resource.proxy"]
-# }
+resource "aws_lambda_permission" "allow_api_gateway" {
+  function_name = "${local.lambda_arn}"
+  statement_id  = "AllowExecutionFromApiGateway"
+  action        = "lambda:InvokeFunction"
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "arn:aws:execute-api:${local.region}:${local.account_id}:${aws_api_gateway_rest_api.api.id}/*/${local.method}${aws_api_gateway_resource.proxy.path}"
 
+  #   # source_arn = "${aws_api_gateway_rest_api.api.execution_arn}/*/*/*"
+  depends_on = ["aws_api_gateway_rest_api.api", "aws_api_gateway_resource.proxy"]
+}
