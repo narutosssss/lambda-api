@@ -1,11 +1,12 @@
 locals {
-  name          = "${var.name}"
-  stage_name    = "${var.stage_name}"
-  resource_name = "${var.resource_name}"
-  method        = "${var.method}"
-  region        = "${var.region}"
-  account_id    = "${var.account_id}"
-  lambda_arn    = "${var.lambda_arn}"
+  name              = "${var.name}"
+  stage_name        = "${var.stage_name}"
+  resource_name     = "${var.resource_name}"
+  method            = "${var.method}"
+  region            = "${var.region}"
+  account_id        = "${var.account_id}"
+  lambda_arn        = "${var.lambda_arn}"
+  lambda_invoke_arn = "${var.lambda_invoke_arn}"
 }
 
 # API Gateway
@@ -45,7 +46,7 @@ resource "aws_api_gateway_integration" "request_method_integration" {
   type        = "AWS_PROXY"
 
   #uri         = "arn:aws:apigateway:${local.region}:lambda:path/2015-03-31/functions/${local.lambda_arn}:$${stageVariables.lambdaAlias}/invocations"
-  uri = "${module.lambda.invoke_arn}"
+  uri = "${local.lambda_invoke_arn}"
 
   # AWS lambdas can only be invoked with the POST method
   integration_http_method = "POST"

@@ -18,6 +18,10 @@ variable "lambda_arn" {
   description = "The lambda arn to invoke"
 }
 
+variable "lambda_invoke_arn" {
+  description = "This lambda invoke"
+}
+
 variable "region" {
   description = "The AWS region, e.g., eu-west-1"
 }
