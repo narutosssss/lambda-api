@@ -12,7 +12,7 @@ resource "aws_api_gateway_deployment" "deployment" {
 resource "aws_api_gateway_resource" "proxy" {
   rest_api_id = "${aws_api_gateway_rest_api.api.id}"
   parent_id   = "${aws_api_gateway_rest_api.api.root_resource_id}"
-  path_part   = "process"
+  path_part   = "${var.resource_name}"
 }
 
 resource "aws_api_gateway_method" "request_method" {
@@ -65,3 +65,4 @@ resource "aws_api_gateway_integration_response" "response_method_integration" {
 #   # source_arn = "${aws_api_gateway_rest_api.api.execution_arn}/*/*/*"
 #   depends_on    = ["aws_api_gateway_rest_api.api", "aws_api_gateway_resource.proxy"]
 # }
+

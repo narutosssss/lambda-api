@@ -8,7 +8,6 @@ variable "stage_name" {
 
 variable "method" {
   description = "The HTTP method"
-  default     = "GET"
 }
 
 variable "lambda" {
@@ -25,4 +24,8 @@ variable "region" {
 
 variable "account_id" {
   description = "The AWS account ID"
+}
+
+variable "resource_name" {
+  description = "This resource name api dev/resource/ "
 }
