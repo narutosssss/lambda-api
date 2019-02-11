@@ -10,6 +10,6 @@ output "lambda_invoke_arn" {
   value = "${aws_lambda_function.lambda.invoke_arn}"
 }
 
-output "version" {
+output "lambda_version" {
   value = "${aws_lambda_function.lambda.version}"
 }

@@ -7,6 +7,7 @@ locals {
   account_id        = "${var.account_id}"
   lambda_arn        = "${var.lambda_arn}"
   lambda_invoke_arn = "${var.lambda_invoke_arn}"
+  lambda_version    = "${var.lambda_version}"
 }
 
 # API Gateway
@@ -47,7 +48,7 @@ resource "aws_api_gateway_integration" "request_method_integration" {
 
   #uri = "arn:aws:apigateway:${local.region}:lambda:path/2015-03-31/functions/${local.lambda_arn}:$${stageVariables.lambdaAlias}/invocations"
 
-  uri = "${local.lambda_invoke_arn}"
+  uri = "${local.lambda_invoke_arn}:${local.lambda_version}"
   # AWS lambdas can only be invoked with the POST method
   integration_http_method = "POST"
 }
