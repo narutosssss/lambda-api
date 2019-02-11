@@ -68,9 +68,9 @@ resource "aws_api_gateway_deployment" "deployment" {
   stage_name  = "${local.stage_name}"
   depends_on  = ["aws_api_gateway_integration.request_method_integration", "aws_api_gateway_integration_response.response_method_integration"]
 
-  #variables = {
-  #  "lambdaAlias" = "dev"
-  #}
+  variables = {
+    "lambdaAlias" = "dev"
+  }
 }
 
 resource "aws_lambda_permission" "allow_api_gateway" {
