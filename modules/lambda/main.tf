@@ -30,10 +30,11 @@ resource "aws_lambda_function" "lambda" {
   source_code_hash = "${base64sha256(file("${data.archive_file.lambda.output_path}"))}"
   timeout          = "${local.timeout}"
 
-  #publish          = true
+  publish = true
 
   environment {
     variables = "${local.environment}"
   }
+
   tags = "${var.tags}"
 }
