@@ -66,7 +66,7 @@ resource "aws_api_gateway_deployment" "deployment" {
   depends_on  = ["aws_api_gateway_integration.request_method_integration", "aws_api_gateway_integration_response.response_method_integration"]
 
   variables = {
-    "lambdaAlias" = "TEST"
+    "lambdaAlias" = "dev"
   }
 }
 
