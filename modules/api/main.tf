@@ -43,10 +43,7 @@ resource "aws_api_gateway_integration" "request_method_integration" {
   resource_id = "${aws_api_gateway_resource.proxy.id}"
   http_method = "${aws_api_gateway_method.request_method.http_method}"
   type        = "AWS_PROXY"
-
-  uri = "arn:aws:apigateway:${local.region}:lambda:path/2015-03-31/functions/${local.lambda_arn}/invocations"
-
-  #uri = "${aws_lambda_function.lambda.invoke_arn}"
+  uri         = "arn:aws:apigateway:${local.region}:lambda:path/2015-03-31/functions/${local.lambda_arn}:$${stageVariables.lambdaAlias}/invocations"
 
   # AWS lambdas can only be invoked with the POST method
   integration_http_method = "POST"
@@ -67,6 +64,10 @@ resource "aws_api_gateway_deployment" "deployment" {
   rest_api_id = "${aws_api_gateway_rest_api.api.id}"
   stage_name  = "${local.stage_name}"
   depends_on  = ["aws_api_gateway_integration.request_method_integration", "aws_api_gateway_integration_response.response_method_integration"]
+
+  variables = {
+    "lambdaAlias" = "TEST"
+  }
 }
 
 # resource "aws_lambda_permission" "allow_api_gateway" {
